@@ -1,0 +1,33 @@
+[project]
+name = "uncalibrated-reasoning"
+version = "0.1.0"
+description = "Code for \"Uncalibrated Reasoning: GRPO Induces Overconfidence for Stochastic Outcomes\""
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "accelerate",
+    "anndata",
+    "einsum>=0.3.0",
+    "flash-attn==2.7.4.post1",
+    "jupyter",
+    "math-verify>=0.8.0",
+    "matplotlib>=3.10.3",
+    "pandas",
+    "pyarrow",
+    "scikit-learn>=1.7.0",
+    "seaborn>=0.13.2",
+    "torch",
+    "transformers",
+    "typer",
+    "verl",
+    "vllm==0.8.3",
+]
+
+[tool.uv]
+package = true
+
+[tool.uv.sources]
+verl = { path = "verl", editable = true }
+
+[tool.setuptools.packages.find]
+include = ["uncalibrated_reasoning"]

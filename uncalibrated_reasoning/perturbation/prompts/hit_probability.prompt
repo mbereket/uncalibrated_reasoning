@@ -1,0 +1,7 @@
+I am planning a perturb-seq screen in K562 cells and plan to assess the effect of perturbations on a phenotype with the following marker genes: ```{pheno_markers}```.
+
+How likely is a CRISPRi perturbation that downregulates {pert} to have a strong effect on this phenotype? For reference, {pheno_hit_percentage}% of perturbed genes had a strong effect on this phenotype in a prior experiment.
+
+Make sure to consider what pathways {pert} is involved with and what pathways the phenotype may relate to when estimating the probability of a strong effect.
+
+Respond with the probability represented as a value between 0 and 1, with up to two decimal points. Enclose your answer in <answer> </answer> tags.

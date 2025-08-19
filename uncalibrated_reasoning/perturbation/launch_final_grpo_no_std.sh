@@ -1,0 +1,50 @@
+cd ../..
+PROJECT_ROOT="$(pwd)"
+uv run python3 -m verl.trainer.main_ppo \
+    reward_model.reward_manager=batch \
+    algorithm.adv_estimator=grpo \
+    custom_reward_function.path=uncalibrated_reasoning/perturbation/probability_reward.py \
+    data.train_files=${PROJECT_ROOT}/paper_data/task_data/replogle_k562_essential_cnmf/split_verl/hit_probability_v2/train.pq \
+    data.val_files=${PROJECT_ROOT}/paper_data/task_data/replogle_k562_essential_cnmf/split_verl/hit_probability_v2/val.pq \
+    data.truncation='left' \
+    data.train_batch_size=512 \
+    data.max_prompt_length=1024  \
+    data.max_response_length=2048  \
+    actor_rollout_ref.model.path=${PROJECT_ROOT}/data_cache/models/Qwen3-4B \
+    actor_rollout_ref.actor.optim.lr=1e-6 \
+    actor_rollout_ref.actor.ppo_mini_batch_size=64 \
+    actor_rollout_ref.actor.ppo_micro_batch_size_per_gpu=2 \
+    actor_rollout_ref.rollout.dtype=bfloat16 \
+    actor_rollout_ref.rollout.log_prob_micro_batch_size_per_gpu=12 \
+    actor_rollout_ref.rollout.gpu_memory_utilization=0.8  \
+    actor_rollout_ref.rollout.n=4  \
+    actor_rollout_ref.ref.log_prob_micro_batch_size_per_gpu=12 \
+    actor_rollout_ref.rollout.tensor_model_parallel_size=2 \
+    actor_rollout_ref.actor.loss_agg_mode=seq-mean-token-sum-norm \
+    actor_rollout_ref.actor.use_kl_loss=True \
+    actor_rollout_ref.actor.kl_loss_coef=0.001 \
+    actor_rollout_ref.actor.kl_loss_type=low_var_kl \
+    actor_rollout_ref.actor.entropy_coeff=0 \
+    actor_rollout_ref.actor.strategy=fsdp2 \
+    actor_rollout_ref.model.enable_gradient_checkpointing=False \
+    actor_rollout_ref.actor.fsdp_config.param_offload=True \
+    actor_rollout_ref.actor.fsdp_config.optimizer_offload=True \
+    actor_rollout_ref.rollout.name=vllm \
+    actor_rollout_ref.ref.fsdp_config.param_offload=True \
+    actor_rollout_ref.ref.strategy=fsdp2 \
+    algorithm.use_kl_in_reward=False \
+    algorithm.norm_adv_by_std_in_grpo=False \
+    trainer.critic_warmup=0 \
+    trainer.val_before_train=False \
+    trainer.default_hdfs_dir=null  \
+    trainer.experiment_name=final_grpo_no_std \
+    trainer.n_gpus_per_node=8  \
+    trainer.nnodes=1  \
+    trainer.save_freq=12  \
+    trainer.test_freq=3  \
+    trainer.total_epochs=16 \
+    trainer.project_name='perturb_reasoning' \
+    trainer.default_local_dir=${PROJECT_ROOT}/data_cache/experiments/final_grpo_no_std/ \
+    ray_init.num_cpus=32 2>&1
+cd uncalibrated_reasoning/perturbation/
+

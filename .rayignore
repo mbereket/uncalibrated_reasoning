@@ -1,0 +1,4 @@
+.vscode/
+data_cache/
+*.egg-info/
+outputs/

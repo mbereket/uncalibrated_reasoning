@@ -1,0 +1,3 @@
+I am planning a perturb-seq screen and plan to assess effects of perturbations on a phenotype with the following marker genes: ```{pheno_markers}```.
+
+How likely is a CRISPRi perturbation applied to {pert} to have a strong effect on this phenotype? Respond with probability from 1-99, representing 1% to 99% chance of a strong effect. Enclose your answer in <answer> </answer> tags.

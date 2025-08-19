@@ -1,0 +1,9 @@
+data_cache/
+*.egg-info/
+.vscode/
+__pycache__/
+outputs/
+*.png
+!paper_data/figures/fig1_final.png
+!paper_data/figures/fig2_final.png
+!paper_data/figures/fig3_final.png

@@ -2,6 +2,8 @@
 
 ![figure1](paper_data/figures/fig1_final.png)
 
+[**Paper**](https://arxiv.org/abs/2508.11800)
+
 ## Environment
 
 1. Install uv (https://docs.astral.sh/uv/getting-started/installation/)
